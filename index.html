@@ -1,68 +1,79 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contagem Regressiva</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contagem Regressiva</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+body{
+    margin:0;
+    background:#111;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    height:100vh;
+    font-family:Arial,sans-serif;
+}
 
-        body {
-            background: #111;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
+#contador{
+    font-size:120px;
+    margin-bottom:30px;
+}
 
-        #contador {
-            font-size: 150px;
-            font-weight: bold;
-            text-shadow: 0 0 20px #00ffcc;
-        }
-    </style>
+#botao{
+    display:none;
+    padding:15px 40px;
+    font-size:22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#00c853;
+    color:white;
+    transition:.3s;
+}
+
+#botao:hover{
+    background:#00e676;
+}
+</style>
+
 </head>
 <body>
 
 <h1 id="contador">10</h1>
 
-<!-- Coloque sua música na mesma pasta e renomeie para musica.mp3 -->
-<audio id="musica" autoplay>
+<audio autoplay loop>
     <source src="musica.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
 </audio>
 
+<button id="botao" onclick="window.location.href='pagina2.html'">
+    Continuar
+</button>
+
 <script>
-    let numero = 10;
-    const contador = document.getElementById("contador");
+let numero = 10;
 
-    const intervalo = setInterval(() => {
-        numero--;
-        contador.textContent = numero;
+const contador = document.getElementById("contador");
+const botao = document.getElementById("botao");
 
-        if (numero <= 0) {
-            clearInterval(intervalo);
-            contador.textContent = "🚀";
-        }
-    }, 1000);
+const intervalo = setInterval(() => {
 
-    // Tenta iniciar a música automaticamente
-    const musica = document.getElementById("musica");
-    musica.play().catch(() => {
-        document.addEventListener("click", () => {
-            musica.play();
-        }, { once: true });
-    });
+    contador.innerHTML = numero;
+
+    if(numero == 0){
+        clearInterval(intervalo);
+        contador.innerHTML = "Fim!";
+        botao.style.display = "block";
+    }
+
+    numero--;
+
+},1000);
 </script>
 
 </body>
 </html>
+            
