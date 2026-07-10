@@ -1,1 +1,68 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem Regressiva</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #111;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        #contador {
+            font-size: 150px;
+            font-weight: bold;
+            text-shadow: 0 0 20px #00ffcc;
+        }
+    </style>
+</head>
+<body>
+
+<h1 id="contador">10</h1>
+
+<!-- Coloque sua música na mesma pasta e renomeie para musica.mp3 -->
+<audio id="musica" autoplay>
+    <source src="musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+</audio>
+
+<script>
+    let numero = 10;
+    const contador = document.getElementById("contador");
+
+    const intervalo = setInterval(() => {
+        numero--;
+        contador.textContent = numero;
+
+        if (numero <= 0) {
+            clearInterval(intervalo);
+            contador.textContent = "🚀";
+        }
+    }, 1000);
+
+    // Tenta iniciar a música automaticamente
+    const musica = document.getElementById("musica");
+    musica.play().catch(() => {
+        document.addEventListener("click", () => {
+            musica.play();
+        }, { once: true });
+    });
+</script>
+
+</body>
+</html>
